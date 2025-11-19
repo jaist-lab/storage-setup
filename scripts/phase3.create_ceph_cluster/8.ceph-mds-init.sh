@@ -1,10 +1,5 @@
-**全ノードで実行:**
-
-```bash
 #!/bin/bash
-# ceph-mds-init.sh
-
-echo "**全ノードで実行:**"
+# 8.ceph-mds-init.sh
 
 HOSTNAME=$(hostname -s)
 MDS_DATA="/var/lib/ceph/mds/ceph-${HOSTNAME}"

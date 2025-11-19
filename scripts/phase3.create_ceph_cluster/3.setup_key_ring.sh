@@ -10,6 +10,7 @@ ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --gen-key -n 
     --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow *' --cap mgr 'allow *'
 
 # Bootstrap OSD キーリング作成
+mkdir -p /var/lib/ceph/bootstrap-osd
 ceph-authtool --create-keyring /var/lib/ceph/bootstrap-osd/ceph.keyring --gen-key -n client.bootstrap-osd \
     --cap mon 'profile bootstrap-osd' --cap mgr 'allow r'
 
@@ -20,6 +21,7 @@ ceph-authtool /tmp/ceph.mon.keyring --import-keyring /var/lib/ceph/bootstrap-osd
 # 権限設定
 chown ceph:ceph /tmp/ceph.mon.keyring
 chmod 600 /etc/ceph/ceph.client.admin.keyring
+chown ceph:ceph /var/lib/ceph/bootstrap-osd/ceph.keyring
 
 echo "Keyrings created successfully"
 ls -l /tmp/ceph.mon.keyring

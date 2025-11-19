@@ -1,7 +1,8 @@
 #!/bin/bash
-# ceph-osd-create.sh
+# 7.ceph-osd-create.sh
 
 echo "**全ノードで実行:**"
+
 
 HOSTNAME=$(hostname -s)
 

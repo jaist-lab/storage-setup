@@ -1,8 +1,4 @@
-#!/bin/bash
-
 # RBDストレージの登録
-echo "**r760xs1で実行:**"
-
 pvesm add rbd ceph-rbd \
     --pool vm-storage \
     --content images,rootdir \
@@ -23,8 +19,3 @@ pvesm status
 ceph -s
 ceph df
 ceph osd tree
-
-echo "**Proxmox Web GUIで確認:**"
-echo "1. Datacenter → Storage"
-echo "2. `ceph-rbd` ストレージが表示されることを確認"
-echo "3. 各ノードで使用可能であることを確認"

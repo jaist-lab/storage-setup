@@ -20,11 +20,11 @@ if [ "${HOSTNAME}" != "r760xs1" ]; then
     scp r760xs1:/etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
     scp r760xs1:/tmp/ceph.mon.keyring /tmp/ceph.mon.keyring
     scp r760xs1:/tmp/monmap /tmp/monmap
-    scp r760xs1:/var/lib/ceph/bootstrap-osd/ceph.keyring /var/lib/ceph/bootstrap-osd/ceph.keyring
     
     # ディレクトリ作成
     mkdir -p /var/lib/ceph/bootstrap-osd
-    chown ceph:ceph /var/lib/ceph/bootstrap-osd
+    scp r760xs1:/var/lib/ceph/bootstrap-osd/ceph.keyring /var/lib/ceph/bootstrap-osd/ceph.keyring
+    chown ceph:ceph /var/lib/ceph/bootstrap-osd/ceph.keyring
 fi
 
 # Monitor初期化

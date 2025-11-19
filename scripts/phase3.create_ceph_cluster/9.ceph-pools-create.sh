@@ -1,5 +1,5 @@
 #!/bin/bash
-# ceph-pools-create.sh
+# 9.ceph-pools-create.sh
 
 echo "**r760xs1で実行:**"
 
