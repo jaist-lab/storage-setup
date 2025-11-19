@@ -1,23 +1,21 @@
 #!/bin/bash
+# 1.install_ceph_packages.sh (Proxmox統合Ceph版)
 
 echo "**全ノードで実行:**"
 
-echo "=== Installing Ceph Packages ==="
+echo "=== Installing Ceph Packages (Proxmox Version) ==="
 
-# Ceph GPGキーのダウンロードと配置（新方式）
-echo "Adding Ceph repository GPG key..."
-wget -q -O- 'https://download.ceph.com/keys/release.asc' | \
-    gpg --dearmor -o /usr/share/keyrings/ceph-archive-keyring.gpg
-
-# Cephリポジトリ追加（新方式）
-echo "Adding Ceph repository..."
-echo "deb [signed-by=/usr/share/keyrings/ceph-archive-keyring.gpg] https://download.ceph.com/debian-squid/ $(lsb_release -sc) main" | \
-    tee /etc/apt/sources.list.d/ceph.list
+# 外部Cephリポジトリを削除（競合回避）
+echo "Removing external Ceph repository..."
+rm -f /etc/apt/sources.list.d/ceph.list
+rm -f /usr/share/keyrings/ceph-archive-keyring.gpg
 
 # パッケージリスト更新
+echo "Updating package list..."
 apt-get update
 
-# Cephパッケージインストール
+# ProxmoxのCephパッケージインストール
+echo "Installing Proxmox Ceph packages..."
 apt-get install -y \
     ceph \
     ceph-mon \
@@ -25,9 +23,27 @@ apt-get install -y \
     ceph-osd \
     ceph-mds \
     ceph-common \
-    radosgw \
+    ceph-fuse \
+    cephfs-top \
     python3-ceph-argparse \
     python3-cephfs
 
+# 追加で必要なパッケージ
+apt-get install -y \
+    ceph-volume \
+    librados2 \
+    librbd1 \
+    libcephfs2
+
 # バージョン確認
+echo ""
+echo "Installed Ceph version:"
 ceph --version
+
+echo ""
+echo "Installed packages:"
+dpkg -l | grep ceph | grep ^ii
+
+echo ""
+echo "=== Ceph packages installed successfully ==="
+
