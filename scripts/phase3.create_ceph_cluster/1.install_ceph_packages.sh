@@ -5,6 +5,7 @@ echo "**全ノードで実行:**"
 
 echo "=== Installing Ceph Packages (Proxmox Version) ==="
 
+
 # 外部Cephリポジトリを削除（競合回避）
 echo "Removing external Ceph repository..."
 rm -f /etc/apt/sources.list.d/ceph.list
