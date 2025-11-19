@@ -3,6 +3,12 @@
 
 echo "**r760xs1で実行 (管理ノード):**"
 
+echo "=== Creating Ceph Configuration (Initial) ==="
+
+# /etc/cephディレクトリ作成
+mkdir -p /etc/ceph
+chown ceph:ceph /etc/ceph 2>/dev/null || chown root:root /etc/ceph
+
 CEPH_CONF="/etc/ceph/ceph.conf"
 CLUSTER_NAME="ceph"
 FSID=$(uuidgen)
@@ -88,9 +94,31 @@ mds_cache_memory_limit = 4294967296
 EOF
 
 echo "Ceph configuration created: ${CEPH_CONF}"
+echo ""
+echo "Configuration contents:"
 cat ${CEPH_CONF}
 
 # FSIDを記録
 mkdir -p /root/storage-setup/logs
 echo ${FSID} > /root/storage-setup/logs/ceph-fsid.txt
+echo ""
 echo "FSID saved to: /root/storage-setup/logs/ceph-fsid.txt"
+echo "FSID: ${FSID}"
+
+# Proxmox共有ディレクトリへコピー
+echo ""
+echo "Copying to Proxmox shared storage..."
+cp /etc/ceph/ceph.conf /etc/pve/ceph.conf
+
+# シンボリックリンク作成
+echo "Creating symbolic link..."
+rm -f /etc/ceph/ceph.conf
+ln -s /etc/pve/ceph.conf /etc/ceph/ceph.conf
+
+# 確認
+echo ""
+echo "Verifying symbolic link..."
+ls -l /etc/ceph/ceph.conf
+
+echo ""
+echo "=== Configuration setup completed ==="
