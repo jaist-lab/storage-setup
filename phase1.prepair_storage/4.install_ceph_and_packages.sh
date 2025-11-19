@@ -17,6 +17,7 @@ apt-get install -y \
     iotop \
     sysstat \
     glow \
+    fio \
     attr
 
 # Ceph関連パッケージ (Phase 3で使用)
