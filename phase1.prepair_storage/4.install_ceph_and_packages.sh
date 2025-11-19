@@ -18,6 +18,8 @@ apt-get install -y \
     sysstat \
     glow \
     fio \
+    tree \
+    curl \
     attr
 
 # Ceph関連パッケージ (Phase 3で使用)
