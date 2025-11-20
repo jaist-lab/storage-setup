@@ -22,6 +22,6 @@ pvesm status | grep local-nvme
 
 echo "**Proxmox Web GUIで確認:**"
 echo "1. Datacenter → Storage"
-echo "2. `local-nvme` ストレージが各ノードに表示されることを確認"
+echo "2. local-nvme ストレージが各ノードに表示されることを確認"
 echo "3. 各ノードを選択して、Contentが正しく設定されていることを確認"
 
