@@ -18,6 +18,7 @@ apt-get install -y \
     sysstat \
     glow \
     fio \
+    iperf3 \
     tree \
     curl \
     attr
