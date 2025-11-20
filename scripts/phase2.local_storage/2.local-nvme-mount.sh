@@ -1,10 +1,7 @@
 #!/bin/bash
-# 2.local-nvme-mount.sh
+# 2.local_nvme_storage.sh
 
-#!/bin/bash
-# fix_local_nvme_storage.sh
-
-echo "=== Fixing local-nvme storage on all nodes ==="
+echo "===  local-nvme storage on all nodes ==="
 
 # 1. 既存ストレージ削除
 echo "Removing existing storage configuration..."
@@ -55,4 +52,4 @@ for node in r760xs{1..5}; do
 done
 
 echo ""
-echo "=== Fix completed ==="
+echo "===  completed ==="
